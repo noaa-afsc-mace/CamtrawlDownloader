@@ -110,7 +110,7 @@ class CamTrawlMetadata(QtCore.QObject):
             sql = ("UPDATE deployment SET latitude=" + str(location[0]) + ", longitude=" +
                     str(location[1]) + ", max_depth=" + str(depthMax) + ")")
             query = QtSql.QSqlQuery(sql, db)
-            query.exec_()
+            query.exec()
 
 
     def getTimespan(self):

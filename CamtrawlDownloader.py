@@ -11,7 +11,7 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtSql import *
 import fileCopier
 from ui import ui_CamTrawlDownloader
-from MaceFunctions import CamtrawlMetadata
+import CamtrawlMetadata
 
 class CamtrawlDownloader(QMainWindow, ui_CamTrawlDownloader.Ui_CamTrawlDownloader):
 
@@ -32,7 +32,7 @@ class CamtrawlDownloader(QMainWindow, ui_CamTrawlDownloader.Ui_CamTrawlDownloade
         self.mutex = QMutex()
 
         #  restore the application state
-        self.appSettings = QSettings('afsc.noaa.gov', 'CamTrawlDownloader')
+        self.appSettings = QSettings('afsc.noaa.gov', 'CamtrawlDownloader')
         strList = self.appSettings.value('sourcedir', [QDir.home().path()])
         self.cbSourcePath.addItems(strList)
         index = self.appSettings.value('sourceindex', -1)
@@ -170,9 +170,9 @@ class CamtrawlDownloader(QMainWindow, ui_CamTrawlDownloader.Ui_CamTrawlDownloade
             self.metadata.open(sourceDir)
             self.metadata.query()
         except:
-            logText = 'Unable to find CamTrawl deployment.'
+            logText = 'Unable to find Camtrawl deployment.'
             self.updateLog(logText, 'red')
-            QMessageBox.critical(self, "Error", "Unable to find CamTrawl deployment. Did you " +
+            QMessageBox.critical(self, "Error", "Unable to find Camtrawl deployment. Did you " +
                     "select the correct directory?")
             QApplication.restoreOverrideCursor()
             logText = 'Download aborted.'
@@ -206,7 +206,7 @@ class CamtrawlDownloader(QMainWindow, ui_CamTrawlDownloader.Ui_CamTrawlDownloade
             #  create the log file in the destination folder
             log = destDir + os.sep + 'CamtrawlDownloader.log'
             self.logFile = open(log,'w')
-            self.logFile.write('--------------------------- CamTrawlDownloader Log ---------------------------\n\n')
+            self.logFile.write('--------------------------- CamtrawlDownloader Log ---------------------------\n\n')
             self.logFile.write('Source directory: ' + sourceDir + '\n')
             self.logFile.write('Destination directory: ' + destDir + '\n')
             if doVerify:
@@ -303,7 +303,7 @@ class CamtrawlDownloader(QMainWindow, ui_CamTrawlDownloader.Ui_CamTrawlDownloade
         shutil.copytree(sourceDir + os.sep + 'settings', destDir + os.sep + 'settings')
 
         #  set the path to the dest metadata file - we'll use it later
-        self.destMetadata = destDir + os.sep + 'logs' + os.sep + 'CamTrawlMetadata.db3'
+        self.destMetadata = destDir + os.sep + 'logs' + os.sep + 'CamtrawlMetadata.db3'
 
 
     def workerError(self, worker, file, error):
@@ -334,7 +334,7 @@ class CamtrawlDownloader(QMainWindow, ui_CamTrawlDownloader.Ui_CamTrawlDownloade
 
         #  determine the dialog title based on the button pressed
         if (sender == self.pbSourcePath):
-            title = 'Select CamTrawl Deployment Directory'
+            title = 'Select Camtrawl Deployment Directory'
             defDir = self.sourceDef
         else:
             title = 'Select Destination Directory'

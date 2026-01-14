@@ -302,6 +302,12 @@ class CamtrawlDownloader(QMainWindow, ui_CamTrawlDownloader.Ui_CamTrawlDownloade
         shutil.copytree(sourceDir + os.sep + 'logs', destDir + os.sep + 'logs')
         shutil.copytree(sourceDir + os.sep + 'settings', destDir + os.sep + 'settings')
 
+        #  the calibration folder is optional - try to copy it
+        try:
+            shutil.copytree(sourceDir + os.sep + 'calibration', destDir + os.sep + 'calibration')
+        except:
+            pass
+
         #  set the path to the dest metadata file - we'll use it later
         self.destMetadata = destDir + os.sep + 'logs' + os.sep + 'CamtrawlMetadata.db3'
 

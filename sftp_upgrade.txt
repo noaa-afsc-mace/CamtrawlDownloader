@@ -1,0 +1,4 @@
+Add the option to download via sftp.
+
+https://pypi.org/project/ftpretty/
+https://stackoverflow.com/questions/33438456/python-ftps-upload-error-425-unable-to-build-data-connection-operation-not-per
